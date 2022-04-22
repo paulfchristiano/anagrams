@@ -438,6 +438,18 @@ var franticSettings = {
     bonusTimeRules: '10,4',
 }
 
+var blinkSettings = {
+    timeAdjustmentRule: '+0',
+    useTimer: true,
+    allowPausing: false,
+    baseTimeLimit: 15,
+    minLength: 8,
+    maxLength: 9,
+    dictionaryName: '50k',
+    bonusTimeRules: '3,2',
+    disappearing: 5,
+}
+
 function settingsFromUI() {
     return {
         timeAdjustmentRule: getValue('timeadjustment'),
@@ -483,6 +495,7 @@ function boldDefaultButton(settings) {
         [$("#button2"), longSettings], 
         [$("#button3"), quickSettings],
         [$("#button4"), franticSettings]
+        [$("#button5"), blinkSettings]
     ]
     for(var i=0; i < buttonsAndSettings.length; i++) {
         const [b, s] = buttonsAndSettings[i];

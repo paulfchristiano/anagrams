@@ -137,6 +137,19 @@
             <input type='radio' name='maxbonus' value='90'> 90s
             <input type='radio' name='maxbonus' value='180'> 180s
     </div>
+    <div>
+        Letters disappear<div class='tooltip'><sup>?</sup>
+            <span class='tooltiptext'>
+               How long letters should take to disappear.
+            </span>
+        </div>:
+            <input type='radio' name='disappeartime' value='0.0'> No
+            <input type='radio' name='disappeartime' value='0.1'> 0.1s
+            <input type='radio' name='disappeartime' value='0.2'> 0.2s
+            <input type='radio' name='disappeartime' value='0.5'> 0.5s
+            <input type='radio' name='disappeartime' value='1.0'> 1s
+            <input type='radio' name='disappeartime' value='5.0'> 5s
+    </div>
     <div> &nbsp; </div> 
     <div> Load settings: </div> 
     <div>
@@ -144,6 +157,7 @@
         <button onclick='settingsToUI(longSettings); $("#button2").blur()' id=button2>Long</button>
         <button onclick='settingsToUI(quickSettings); $("#button3").blur()' id=button3>Quick</button>
         <button onclick='settingsToUI(franticSettings); $("#button4").blur()' id=button4>Frantic</button>
+        <button onclick='settingsToUI(blinkSettings); $("#button5").blur()' id=button5>Blink</button>
     </div>
     <div> &nbsp; </div> 
     <div> <button onclick='setSettings(settingsFromUI()); reset(); $("#applybutton").blur()' id=applybutton>Apply changes and reset</button>
