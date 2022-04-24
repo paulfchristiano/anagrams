@@ -365,6 +365,7 @@ var defaultSettings = {
     dictionaryName: '50k',
     bonusTimeRules: '2,1',
     maxBonus: 0,
+    disappearing: 0,
 }
 
 var longSettings = {
@@ -377,6 +378,7 @@ var longSettings = {
     dictionaryName: '50k',
     bonusTimeRules: '2,1',
     maxBonus: 0,
+    disappearing: 0,
 }
 
 var quickSettings = {
@@ -389,6 +391,7 @@ var quickSettings = {
     dictionaryName: '50k',
     bonusTimeRules: '3,2',
     maxBonus: 45,
+    disappearing: 0,
 }
 
 var franticSettings = {
@@ -401,6 +404,7 @@ var franticSettings = {
     dictionaryName: '50k',
     bonusTimeRules: '3,2',
     maxBonus: 90,
+    disappearing: 0,
 }
 
 var blinkSettings = {
