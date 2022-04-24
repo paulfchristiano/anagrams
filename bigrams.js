@@ -17,6 +17,8 @@ var bonusScored;
 var bonusReceived;
 var topScores;
 var focus;
+var disappearing;
+var timeout;
 
 function randomWord(minLength, maxLength) {
     maxLength = Math.max(minLength, maxLength)
@@ -182,6 +184,9 @@ function refresh() {
             if (confirmed[i]) $(x).addClass('confirmed')
         })
         $('#misses').html(renderMisses(misses))
+        if (settings.disappearing) {
+            hide()
+        }
     }
 
     $('#winrate').text(renderWinRate(victories.length, failures.length))
@@ -281,6 +286,7 @@ function showTime() {
 }
 
 function fail(gaveUp) {
+    reveal()
     bonusTimeText = 0
     pauseText = ["(", unpauser("It was "), renderPair(secretPair), ")"].join('')
     failures.push(secretPair)
@@ -293,10 +299,25 @@ function fail(gaveUp) {
 }
 
 function succeed(pair) {
+    reveal()
     bonusTimeText = 0
     victories.push(pair)
     updateScores()
     pauseThen(unpauser("(Enter to start)"), initialize)
+}
+
+function hide() {
+    const delay = Number(settings.disappearing) * 1000
+    console.log(delay)
+    timeout = setTimeout(() => {
+        $("#source").addClass("hidden")
+    }, delay)
+    
+}
+
+function reveal() {
+    clearTimeout(timeout)
+    $("#source").removeClass("hidden")
 }
 
 function getBonusTime(N) {
@@ -403,6 +424,7 @@ var defaultSettings = {
     maxLength: 6,
     dictionaryName: '10k',
     bonusTimeRules: '5,2',
+    disappearing: 0,
 }
 
 var longSettings = {
@@ -414,6 +436,7 @@ var longSettings = {
     maxLength: 7,
     dictionaryName: '10k',
     bonusTimeRules: '10,4',
+    disappearing: 0,
 }
 
 var quickSettings = {
@@ -425,6 +448,7 @@ var quickSettings = {
     maxLength: 5,
     dictionaryName: '10k',
     bonusTimeRules: '3,1',
+    disappearing: 0,
 }
 
 var franticSettings = {
@@ -436,6 +460,20 @@ var franticSettings = {
     maxLength: 7,
     dictionaryName: '50k',
     bonusTimeRules: '10,4',
+    disappearing: 0,
+}
+
+var blinkSettings = {
+    timeAdjustmentRule: '+15',
+    useTimer: true,
+    allowPausing: false,
+    baseTimeLimit: 30,
+    minLength: 6,
+    maxLength: 8,
+    dictionaryName: '10k',
+    bonusTimeRules: '2,1',
+    maxBonus: 0,
+    disappearing: 0.2,
 }
 
 function settingsFromUI() {
@@ -448,6 +486,7 @@ function settingsFromUI() {
         maxLength : Number(getValue('maxlength')),
         dictionaryName : getValue('dictionary'),
         bonusTimeRules: getValue('timeaddition'),
+        disappearing: Number(getValue('disappearing')),
     }
 }
 
@@ -475,6 +514,7 @@ function settingsToUI(settings) {
     setTo('dictionary', settings.dictionaryName)
     setTo('timeaddition', settings.bonusTimeRules)
     setTo('maxbonus', settings.maxBonus)
+    setTo('disappearing', settings.disappearing)
 }
 
 function boldDefaultButton(settings) {
@@ -482,7 +522,8 @@ function boldDefaultButton(settings) {
         [$("#button1"), defaultSettings],
         [$("#button2"), longSettings], 
         [$("#button3"), quickSettings],
-        [$("#button4"), franticSettings]
+        [$("#button4"), franticSettings],
+        [$("#button5"), blinkSettings]
     ]
     for(var i=0; i < buttonsAndSettings.length; i++) {
         const [b, s] = buttonsAndSettings[i];
@@ -509,6 +550,7 @@ function reset(){
     victories = []
     failures = []
     misses = []
+    reveal()
     pauseThen(unpauser("(Enter to start)"), initialize)
 }
 
