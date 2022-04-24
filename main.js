@@ -246,6 +246,7 @@ function winner() {
 }
 
 function fail(gaveUp) {
+    reveal()
     bonusTimeText = 0
     pauseText = ["(", unpauser("It was "), renderWord(secretWord), ")"].join('')
     failures.push(secretWord)
@@ -258,6 +259,7 @@ function fail(gaveUp) {
 }
 
 function succeed(word) {
+    reveal()
     bonusTimeText = 0
     victories.push(word)
     updateScores()
